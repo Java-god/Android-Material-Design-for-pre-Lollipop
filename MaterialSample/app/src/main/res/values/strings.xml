@@ -10,7 +10,7 @@
     <string name="title_activity_tab_animation">Tabs Animation</string>
     <string name="title_activity_sticky_view">StickyViewActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    cha<!-- TODO: Remove or nge this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_swipe_refresh">Swipe Refresh</string>
     <string name="title_activity_mini_drawer">Mini Drawer</string>
@@ -25,4 +25,16 @@
     <string name="title_activity_tabs_header">Header Tabs</string>
     <string name="title_activity_pager">PagerActivity</string>
     <string name="section_format">Page %1$d</string>
+    
+   <!--Added the following string and replaced initial hardcoded ones-->
+    <string name="section_format">Welcome!\nLet\'s show you around.</string>
+    <string name="section_format2">Great!\nYou\'re are almost done.</string>
+    <string name="section_format3">Awesome!\nYou\'re are all set.</string>
+    <string name="finish">Finish</string>
+    <string name="skip">Skip</string>
+    <string name="onboarding_long_description">This explains the first slide.</string>
+    <string name="onboarding_long_description2">This explains the second slide.</string>
+    <string name="onboarding_long_description3">This explains the third slide</string>
+
+
 </resources>
