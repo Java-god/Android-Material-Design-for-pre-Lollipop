@@ -1,4 +1,4 @@
-package com.suleiman.material.activities;
+package com.safelintels.user.onboardinglearner;
 
 import android.animation.ArgbEvaluator;
 import android.graphics.Color;
@@ -21,10 +21,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.suleiman.material.R;
-import com.suleiman.material.utils.Utils;
-
+/**
+ * Created by Raphael on 3/24/16.
+ */
 public class PagerActivity extends AppCompatActivity {
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,20 +40,20 @@ public class PagerActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+
+
+
+
+
     private ViewPager mViewPager;
     ImageButton mNextBtn;
     Button mSkipBtn, mFinishBtn;
 
     ImageView zero, one, two;
     ImageView[] indicators;
-
-    int lastLeftValue = 0;
-
+    
     CoordinatorLayout mCoordinator;
-
-
-    static final String TAG = "PagerActivity";
-
+    
     int page = 0;   //  to track page position
 
     @Override
@@ -60,12 +61,12 @@ public class PagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-                getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans80));
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans80));
+        }
 
         setContentView(R.layout.activity_pager);
 
@@ -94,7 +95,14 @@ public class PagerActivity extends AppCompatActivity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        try {
+            assert mViewPager != null;
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
 
         mViewPager.setCurrentItem(page);
         updateIndicators(page);
@@ -138,11 +146,8 @@ public class PagerActivity extends AppCompatActivity {
                         break;
                 }
 
-
                 mNextBtn.setVisibility(position == 2 ? View.GONE : View.VISIBLE);
                 mFinishBtn.setVisibility(position == 2 ? View.VISIBLE : View.GONE);
-
-
             }
 
             @Override
@@ -222,7 +227,13 @@ public class PagerActivity extends AppCompatActivity {
 
         ImageView img;
 
+
         int[] bgs = new int[]{R.drawable.ic_flight_24dp, R.drawable.ic_mail_24dp, R.drawable.ic_explore_24dp};
+
+        int[] heading = new int[]{R.string.section_format, R.string.section_format2, R.string.section_format3};
+
+        int[] description = new int[]{R.string.onboarding_long_description, R.string.onboarding_long_description2, R.string.onboarding_long_description3};
+
 
         public PlaceholderFragment() {
         }
@@ -243,17 +254,20 @@ public class PagerActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_pager, container, false);
+
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(heading[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
+
 
             img = (ImageView) rootView.findViewById(R.id.section_img);
             img.setBackgroundResource(bgs[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
 
 
+            TextView textView1 = (TextView) rootView.findViewById(R.id.section_description);
+            textView1.setText(description[getArguments().getInt(ARG_SECTION_NUMBER) -1]);
+            
             return rootView;
         }
-
-
     }
 
     /**
@@ -261,7 +275,6 @@ public class PagerActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -293,8 +306,5 @@ public class PagerActivity extends AppCompatActivity {
             }
             return null;
         }
-
     }
-
-
 }
